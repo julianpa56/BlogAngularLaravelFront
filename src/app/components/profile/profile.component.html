@@ -1,0 +1,20 @@
+<div *ngIf="!posts">
+    <h2>Cargando</h2>
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts">
+    <div class="d-flex" *ngIf="identity && identity.image">
+        <img class="avatar-user me-2" src="{{url + '/users/avatar/' + identity.image}}" alt="avatar-user">
+        <h2>Perfil de {{user.name + ' ' + user.surname}}</h2>
+    </div>
+    <hr>
+    <h4>Biografía</h4>
+    <p [innerHTML]="user.description">{{user.description}}</p>
+    <hr>
+    
+
+    <!-- Listado de post -->
+
+    <app-post-list [posts]="posts" [identity]="identity" [url]="url"></app-post-list>
+
+</div>

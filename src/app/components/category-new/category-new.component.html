@@ -1,0 +1,30 @@
+<h2>Crear categoría</h2>
+
+
+<div class="col-md-12 mt-3 d-flex flex-column align-items-center">
+    <p>Crea una nueva categoria para el blog</p>
+    <hr/>
+
+    <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" class="col-md-5" >
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" required>
+            <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                El nombre de la categoría no es válido
+            </small>
+        </div>
+        <br>
+        <input type="submit" value="Guardar" class="btn btn-success" [disabled]="categoryForm.invalid">
+    </form>
+
+
+    <hr/>
+    <div *ngIf="status == 'success'" class="alert alert-success mt-5" role="alert">
+        La categoría se ha creado correctamente
+    </div>
+    <div *ngIf="status == 'error'" class="alert alert-danger mt-5" role="alert">
+        Ocurrio un error al crear la categoría
+    </div>
+
+
+</div>

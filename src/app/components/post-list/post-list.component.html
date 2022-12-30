@@ -1,0 +1,39 @@
+<div class="d-flex flex-wrap mt-3">
+    <div class="card" style="width: 18rem; margin:10px;" *ngFor="let post of posts">
+        <div *ngIf="post.image">
+            <img src="{{url+'/post/image/'+post.image}}" class="card-img-top img-card" alt="imagen post" >
+        </div>
+        <div *ngIf="!post.image">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top img-card" alt="imagen alternativa">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"><a [routerLink]="['/entrada/',post.id]">{{post.title}}</a></h5>
+            <a [routerLink]="['/entrada/',post.id]"class="btn btn-success me-2">Leer</a>
+            <span *ngIf="identity && identity.sub == post.user_id">
+                <a [routerLink]="['/editar-entrada/' + post.id]" class="btn btn-warning me-2">Editar</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDelete'+post.id">
+                    Eliminar
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="modalDelete{{post.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar post</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Desea eliminar el post?
+                            </div>
+                            <div class="modal-footer">
+                                <a (click)="deletePost(post.id)" class="btn btn-danger close" data-bs-dismiss="modal">Borrar</a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

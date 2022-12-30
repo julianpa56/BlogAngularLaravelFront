@@ -1,0 +1,7 @@
+.avatar-edit{
+    width: 80px;
+    height: 80px;
+    margin: 20px 0px;
+    object-fit: cover;
+    object-position: center;
+}

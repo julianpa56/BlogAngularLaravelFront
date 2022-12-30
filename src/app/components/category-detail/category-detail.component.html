@@ -1,0 +1,15 @@
+<h2>Posts de categoría {{category.name}}</h2>
+
+<div *ngIf="!category">
+    <h4>Cargando...</h4>
+</div>
+
+<div class="alert alert-warning" *ngIf="!posts || posts.length == 0">
+    No hay posts en esta categoría
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts">
+    <h2>Listado de posts</h2>
+    <app-post-list [posts]="posts" [identity]="identity" [url]="url"></app-post-list>
+
+</div>

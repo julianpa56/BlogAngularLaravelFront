@@ -1,0 +1,8 @@
+<div *ngIf="!posts">
+    <h2>Cargando</h2>
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts">
+    <h2>Listado de posts</h2>
+    <app-post-list [posts]="posts" [identity]="identity" [url]="url"></app-post-list>
+</div>

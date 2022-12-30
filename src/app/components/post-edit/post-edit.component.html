@@ -1,0 +1,58 @@
+<h2>Editar una entrada</h2>
+
+
+<div class="col-md-12 mt-3 d-flex flex-column align-items-center">
+    <p>Edita tu artículo del blog</p>
+    <hr/>
+
+    <form class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)" >
+        <div class="form-group">
+            <label for="title" class="mb-3">Título</label>
+            <input type="text" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
+            <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                El título no es válido
+            </small>
+        </div>
+        <div class="form-group mt-5">
+            <label for="content" class="mb-3">Contenido</label>
+            <textarea [froalaEditor]="froala_options" type="text" name="content" #content="ngModel" [(ngModel)]="post.content" class="form-control" required></textarea>
+            <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                El contenido no es válido
+            </small>
+        </div>
+        <div class="form-group mt-5">
+            <label for="category_id" class="mb-3">Categoría</label>
+            <select type="text" name="category_id" #category_id="ngModel" [(ngModel)]="post.category_id" class="form-select" required>
+                <option *ngFor="let category of categories" value="{{category.id}}">
+                    {{category.name}}
+                </option>
+            </select>
+            <small *ngIf="!category_id.valid && category_id.touched" class="invalid-feedback d-block">
+                El contenido no es válido
+            </small>
+        </div>
+
+        <div class="form-group mt-5">
+            <label for="image" class="mb-3">Imagen</label>
+            <div *ngIf="post.image">
+                <img class="image-post" src="{{url + '/post/image/' + post.image}}" alt="avatar">
+            </div>
+            <angular-file-uploader [config]="afuConfig" (ApiResponse)="imageUpload($event)"></angular-file-uploader>
+            <small *ngIf="statusImage == 'error'" class="invalid-feedback d-block">
+                Ocurrió un error al subir la imagen
+            </small>
+        </div>
+        <br>
+        <input type="submit" value="Guardar" class="btn btn-success" [disabled]="postNew.invalid">
+    </form>
+
+    <hr/>
+    <!-- <div *ngIf="status == 'success'" class="alert alert-success mt-5" role="alert">
+        La categoría se ha creado correctamente
+    </div>
+    <div *ngIf="status == 'error'" class="alert alert-danger mt-5" role="alert">
+        Ocurrio un error al crear la categoría
+    </div> -->
+
+
+</div>
